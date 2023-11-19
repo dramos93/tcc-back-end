@@ -1,2 +1,7 @@
 __pycache__
+game/*/__pycache__/
 *.pyc
+*cpython*
+game/infra/db/entities/__pycache__/user.cpython-311.pyc
+game/infra/db/settings/__pycache__/connection.cpython-311.pyc
+.gitignore
