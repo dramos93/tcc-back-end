@@ -12,5 +12,6 @@ class UsersEntity(Base):
     def __repr__(self):
         return f"User [id={self.user_id}, nickname={self.user_nickname}, class_id={self.user_class_id}]"
     
-    def create_table(engine):
+    @classmethod
+    def create_table(cls, engine):
         Base.metadata.create_all(engine)

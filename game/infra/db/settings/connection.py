@@ -1,13 +1,14 @@
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
+from sqlalchemy.inspection import inspect
 
 
 class DBConnectionHandler:
     def __init__(self) -> None:
         self.__connection_string = "postgresql://postgres:123456@localhost:5432/game"
         self.__engine = self.__create_database_engine()
-        self.session = None
+        # self.session = None
 
     def __create_database_engine(self):
         engine = create_engine(self.__connection_string)
