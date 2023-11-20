@@ -14,3 +14,6 @@ class UsersRepositoryInterface(ABC):
 
     @abstractmethod
     def get_user_by_id(cls, user_id: int) -> Users: pass
+
+    @abstractmethod
+    def nick_name_exists(cls, user_nickname: str) -> bool: pass

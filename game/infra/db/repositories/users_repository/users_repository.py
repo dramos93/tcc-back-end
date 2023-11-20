@@ -1,4 +1,6 @@
 from typing import List
+
+from sqlalchemy import select
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.users import Users
 from game.infra.db.settings.connection import DBConnectionHandler
@@ -29,11 +31,13 @@ class UsersRepository(UsersRepositoryInterface):
                 raise exception
             
     @classmethod
-    def get_all_users(cls) -> List[UsersEntity]:
+    def get_all_users(cls) -> List[Users]:
         with DBConnectionHandler() as db:
             try:
-                return db.session.query(UsersEntity).all()
-               
+                query = select(UsersEntity)
+                entities = db.session.execute(query).scalars().all()
+                return list(entities)
+
             except Exception as exception:
                 db.session.rollback()
                 raise exception
@@ -42,8 +46,20 @@ class UsersRepository(UsersRepositoryInterface):
     def get_user_by_id(cls, user_id: int) -> Users:
         with DBConnectionHandler() as db:
             try:
-                return db.session.query(UsersEntity).filter(UsersEntity.user_id == user_id).first()
+                query = select(UsersEntity).where(UsersEntity.user_id == user_id)
+                entity = db.session.execute(query).scalar()
+                return entity 
                 
+            except Exception as exception:
+                db.session.rollback()
+                raise exception
+
+    @classmethod
+    def nick_name_exists(cls, user_nick_name: str) -> bool:
+        with DBConnectionHandler() as db:
+            try:
+                query = db.session.query(UsersEntity).filter(UsersEntity.user_nickname == user_nick_name).exists()
+                return db.session.query(query).scalar()
             except Exception as exception:
                 db.session.rollback()
                 raise exception
