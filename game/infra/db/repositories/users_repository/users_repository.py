@@ -9,19 +9,23 @@ from game.infra.db.entities.user import UsersEntity
 class UsersRepository(UsersRepositoryInterface):
 
     @classmethod
-    def insert_user(cls, user_name: str, user_nickname: str, user_class_id: int, user_role: int) -> None:
+    def insert_user(cls, user_class_id: int, user_name: str, user_nickname: str, user_password: str, user_role: int, user_active: bool = True) -> None:
         with DBConnectionHandler() as db:
             try:
                 engine = db.get_engine()
-                # new_register.__table__.drop(bind=db.get_engine(), checkfirst=True)
                 UsersEntity.create_table(engine=engine)
+                
 
                 new_register = UsersEntity(
-                    user_name =user_name,
-                    user_nickname = user_nickname,
-                    user_class_id= user_class_id,
-                    user_role = user_role
+                    user_name=user_name,
+                    user_nickname=user_nickname,
+                    user_class_id=user_class_id,
+                    user_password=user_password,
+                    user_role=user_role,
+                    user_active=user_active
                 )
+                # new_register.__table__.drop(bind=db.get_engine(), checkfirst=True)
+
                 db.session.add(new_register)
                 db.session.commit()
 

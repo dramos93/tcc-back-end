@@ -10,11 +10,11 @@ class UsersRepositoryMock(UsersRepositoryInterface):
             
     @classmethod
     def get_all_users(cls) -> List[Users]:
-        return [Users(1, "Daniel", "dramos93", 1, 1)]
+        return [Users(1, "Daniel", "dramos93", 1, 1, True)]
             
     @classmethod
     def get_user_by_id(cls, user_id: int) -> Users:
-        return Users(1, "Daniel", "dramos93", 1, 1)
+        return Users(1, "Daniel", "dramos93", 1, 1, True)
 
     @classmethod
     def nick_name_exists(cls, user_nick_name: str) -> bool:
