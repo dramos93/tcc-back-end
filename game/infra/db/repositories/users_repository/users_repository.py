@@ -1,5 +1,4 @@
 from typing import List
-
 from sqlalchemy import select
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.users import Users

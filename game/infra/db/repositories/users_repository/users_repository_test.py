@@ -1,4 +1,3 @@
-from game.infra.db.repositories import users_repository
 from game.infra.db.repositories.users_repository.users_repository import UsersRepository
 import pytest 
 
