@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List
 from game.domain.models.users import Users
-from game.infra.db.entities.user import UsersEntity
+from game.infra.db.entities.user_entity import UsersEntity
 
 
 class UsersRepositoryInterface(ABC):

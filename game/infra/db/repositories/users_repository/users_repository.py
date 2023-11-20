@@ -3,7 +3,7 @@ from sqlalchemy import select
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.users import Users
 from game.infra.db.settings.connection import DBConnectionHandler
-from game.infra.db.entities.user import UsersEntity
+from game.infra.db.entities.user_entity import UsersEntity
 
 
 class UsersRepository(UsersRepositoryInterface):
