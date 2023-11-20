@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from game.data.interfaces.class_repository_interface import ClassRepositoryInterface
-from game.domain.models.classModel import ClassModel
+from game.domain.models.class_model import ClassModel
 from game.infra.db.entities.class_entity import ClassEntity
 from game.infra.db.settings.connection import DBConnectionHandler
 

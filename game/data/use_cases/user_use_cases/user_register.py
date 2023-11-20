@@ -1,7 +1,6 @@
 from game.data.interfaces.class_repository_interface import ClassRepositoryInterface
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.user_cases.user_register_interface import UserRegisterInterface
-from game.infra.db.repositories.class_repository.class_repository import ClassRepository
 
 class UserRegisterUseCase(UserRegisterInterface):
 

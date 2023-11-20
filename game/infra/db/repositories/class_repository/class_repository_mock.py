@@ -1,5 +1,5 @@
 from game.data.interfaces.class_repository_interface import ClassRepositoryInterface
-from game.domain.models.classModel import ClassModel
+from game.domain.models.class_model import ClassModel
 
 
 class ClassRepositoryMock(ClassRepositoryInterface):

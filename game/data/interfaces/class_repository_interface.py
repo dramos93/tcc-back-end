@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from game.domain.models.classModel import ClassModel
+from game.domain.models.class_model import ClassModel
 
 
 class ClassRepositoryInterface(ABC):

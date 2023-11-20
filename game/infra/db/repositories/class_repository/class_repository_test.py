@@ -1,6 +1,5 @@
 import pytest
 from .class_repository import ClassRepository
-from game.infra.db.entities.class_entity import ClassEntity
 
 @pytest.mark.skip("Para não salvar mais no banco.")
 def test_create_class_repository():
