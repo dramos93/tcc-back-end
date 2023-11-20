@@ -15,7 +15,6 @@ class UsersRepository(UsersRepositoryInterface):
                 engine = db.get_engine()
                 UsersEntity.create_table(engine=engine)
                 
-
                 new_register = UsersEntity(
                     user_name=user_name,
                     user_nickname=user_nickname,

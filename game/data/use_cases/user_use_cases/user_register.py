@@ -1,10 +1,13 @@
+from game.data.interfaces.class_repository_interface import ClassRepositoryInterface
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.user_cases.user_register_interface import UserRegisterInterface
+from game.infra.db.repositories.class_repository.class_repository import ClassRepository
 
 class UserRegisterUseCase(UserRegisterInterface):
 
-    def __init__(self, use_case: UsersRepositoryInterface) -> None:
-        self.__user_repository = use_case
+    def __init__(self, user_use_case: UsersRepositoryInterface, class_user_case: ClassRepositoryInterface) -> None:
+        self.__user_repository = user_use_case
+        self.__class_user_case = class_user_case
 
     def register(self, user_name: str, user_nickname: str, user_class_id: int, user_role: int) -> None:
         # Validar se o nickname já existe
@@ -34,8 +37,7 @@ class UserRegisterUseCase(UserRegisterInterface):
         if not name.isalpha():
             raise Exception('Deve conter só letra.')
 
-
-    @classmethod
-    def __user_class_exists(cls, class_id: int) -> None:
-        """Deve buscar da classe."""
-        pass
+    def __user_class_exists(self, class_id: int) -> None:
+        if not self.__class_user_case.exists(class_id=class_id):
+            raise Exception("Essa classe não existe.")
+            
