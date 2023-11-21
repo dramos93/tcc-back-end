@@ -3,6 +3,7 @@ from game.infra.db.settings.base import Base
 
 class UsersEntity(Base):
     __tablename__ = "users"
+    
     user_id = Column(Integer, primary_key=True, autoincrement=True)
     user_class_id = Column(Integer)
     user_name = Column(String, nullable=False)

@@ -8,6 +8,8 @@ class ClassEntity(Base):
     class_name = Column(String, nullable=False)
     class_active = Column(Boolean, default=True)
 
+    def __repr__(self):
+        return f"Class [class_id={self.class_id}, class_name={self.class_name}, class_active={self.class_active}]"
 
     @classmethod
     def create_table(cls, engine):
