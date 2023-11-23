@@ -35,10 +35,8 @@ class MultiplicationGameRepository(MultiplicationGameRepositoryInterface):
         """Get all multiplication game from user_id and class_id"""
         with DBConnectionHandler() as db:
             try:
-                query = select(MultiplicationGameEntity)
-                # .filter(MultiplicationGameEntity.user_id == user_id, MultiplicationGameEntity.class_id == class_id)
+                query = select(MultiplicationGameEntity).filter(MultiplicationGameEntity.user_id == user_id, MultiplicationGameEntity.class_id == class_id)
                 data = db.session.execute(query).scalars().all()
-                
                 return list(data)
             except Exception as exception:
                 db.session.rollback()
