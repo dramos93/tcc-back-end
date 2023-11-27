@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Integer, MetaData, String
+from sqlalchemy import Boolean, Column, Integer, String
 from game.infra.db.settings.base import Base
 
 class UsersEntity(Base):

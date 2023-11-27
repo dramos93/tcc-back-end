@@ -12,6 +12,7 @@ pytest = "^7.4.3"
 psycopg2 = "^2.9.9"
 pylint = "^3.0.2"
 sqlalchemy-utils = "^0.41.1"
+uuid = "^1.30"
 
 
 [build-system]
