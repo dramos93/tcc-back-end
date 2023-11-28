@@ -12,7 +12,7 @@ class DBConnectionHandler:
 
     def __create_database_engine(self):
         engine = create_engine(self.__connection_string)
-        
+
         if not database_exists(engine.url):
             create_database(engine.url)
 
@@ -20,7 +20,7 @@ class DBConnectionHandler:
 
     def get_engine(self):
         return self.__engine
-    
+
     # def create_table_when_does_not(self, TableEntity) -> None:
     #     # ins = inspect(self.__engine)
     #     # ret = ins.has_table(table_name=TableEntity.__tablename__)
@@ -31,7 +31,7 @@ class DBConnectionHandler:
     #     table = TableEntity.__table__
     #     rt = table.create(bind=self.__engine, checkfirst=True)
     #     print(f"\n\n\nCRIOU A TABELA {TableEntity.__tablename__} ---- {rt}\n\n\n")
-    
+
     def __enter__(self):
         session_make = sessionmaker(bind=self.__engine)
         self.session = session_make()

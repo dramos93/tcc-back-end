@@ -17,4 +17,3 @@ class MultiplicationGameEntity(Base):
     @classmethod
     def create_table(cls, engine):
         Base.metadata.create_all(engine)
-    

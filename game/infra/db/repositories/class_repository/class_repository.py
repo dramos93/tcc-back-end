@@ -6,7 +6,6 @@ from game.infra.db.settings.connection import DBConnectionHandler
 
 
 class ClassRepository(ClassRepositoryInterface):
-
     @classmethod
     def create(cls, class_name: str, class_active: bool = True):
         with DBConnectionHandler() as db:
@@ -14,8 +13,10 @@ class ClassRepository(ClassRepositoryInterface):
                 engine = db.get_engine()
                 ClassEntity.create_table(engine=engine)
 
-                new_class = ClassEntity(class_name=class_name, class_active=class_active)
-                
+                new_class = ClassEntity(
+                    class_name=class_name, class_active=class_active
+                )
+
                 db.session.add(new_class)
                 db.session.commit()
             except Exception as exception:
@@ -33,15 +34,16 @@ class ClassRepository(ClassRepositoryInterface):
             except Exception as exception:
                 db.session.rollback()
                 raise exception
-            
+
     @classmethod
     def exists(cls, class_id) -> bool:
         with DBConnectionHandler() as db:
             try:
-                query = select(ClassEntity).where(ClassEntity.class_id == class_id).exists()
+                query = (
+                    select(ClassEntity).where(ClassEntity.class_id == class_id).exists()
+                )
 
                 return db.session.query(query).scalar()
             except Exception as exception:
                 db.session.rollback()
                 raise exception
-        

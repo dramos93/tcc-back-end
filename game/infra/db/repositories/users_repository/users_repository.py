@@ -7,21 +7,28 @@ from game.infra.db.entities.user_entity import UsersEntity
 
 
 class UsersRepository(UsersRepositoryInterface):
-
     @classmethod
-    def insert_user(cls, user_class_id: int, user_name: str, user_nickname: str, user_password: str, user_role: int, user_active: bool = True) -> None:
+    def insert_user(
+        cls,
+        user_class_id: int,
+        user_name: str,
+        user_nickname: str,
+        user_password: str,
+        user_role: int,
+        user_active: bool = True,
+    ) -> None:
         with DBConnectionHandler() as db:
             try:
                 engine = db.get_engine()
                 UsersEntity.create_table(engine=engine)
-                
+
                 new_register = UsersEntity(
                     user_name=user_name,
                     user_nickname=user_nickname,
                     user_class_id=user_class_id,
                     user_password=user_password,
                     user_role=user_role,
-                    user_active=user_active
+                    user_active=user_active,
                 )
                 # new_register.__table__.drop(bind=db.get_engine(), checkfirst=True)
 
@@ -31,7 +38,7 @@ class UsersRepository(UsersRepositoryInterface):
             except Exception as exception:
                 db.session.rollback()
                 raise exception
-            
+
     @classmethod
     def get_all_users(cls) -> List[Users]:
         with DBConnectionHandler() as db:
@@ -43,15 +50,15 @@ class UsersRepository(UsersRepositoryInterface):
             except Exception as exception:
                 db.session.rollback()
                 raise exception
-            
+
     @classmethod
     def get_user_by_id(cls, user_id: int) -> Users:
         with DBConnectionHandler() as db:
             try:
                 query = select(UsersEntity).where(UsersEntity.user_id == user_id)
                 entity = db.session.execute(query).scalar()
-                return entity 
-                
+                return entity
+
             except Exception as exception:
                 db.session.rollback()
                 raise exception
@@ -60,7 +67,11 @@ class UsersRepository(UsersRepositoryInterface):
     def nick_name_exists(cls, user_nick_name: str) -> bool:
         with DBConnectionHandler() as db:
             try:
-                query = db.session.query(UsersEntity).filter(UsersEntity.user_nickname == user_nick_name).exists()
+                query = (
+                    db.session.query(UsersEntity)
+                    .filter(UsersEntity.user_nickname == user_nick_name)
+                    .exists()
+                )
                 return db.session.query(query).scalar()
             except Exception as exception:
                 db.session.rollback()

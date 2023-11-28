@@ -1,8 +1,9 @@
 from game.presentation.http_types.http_request import HttpRequest
 from game.domain.user_cases.user_finder_interface import UserFinderInterface
 from game.presentation.http_types.http_response import HttpResponse
-from game.presentation.interfaces.user_controller_interface import UserControllerInterface
-
+from game.presentation.interfaces.user_controller_interface import (
+    UserControllerInterface,
+)
 
 
 class CreateUserController(UserControllerInterface):
@@ -16,4 +17,3 @@ class CreateUserController(UserControllerInterface):
         response = HttpResponse(body=body, status_code=200)
 
         return response
-         
