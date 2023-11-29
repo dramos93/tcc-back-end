@@ -4,16 +4,18 @@ from game.infra.db.repositories.class_repository.class_repository_mock import (
 from game.infra.db.repositories.users_repository.users_repository_mock import (
     UsersRepositoryMock,
 )
+import pytest
+from game.infra.db.repositories.users_repository.users_repository import UsersRepository
+from .user_use_case import UserUseCase
 from datetime import datetime
 import pytest
-from .user_register import UserRegisterUseCase
 
 users_repository = UsersRepositoryMock()
 class_repository = ClassRepositoryMock()
 
 
 def test_user_register_use_case():
-    user_register_use_case = UserRegisterUseCase(
+    user_register_use_case = UserUseCase(
         user_use_case=users_repository, class_user_case=class_repository
     )
 
@@ -26,7 +28,7 @@ def test_user_register_use_case():
 
 
 def test_user_nickname_exists():
-    user_register_use_case = UserRegisterUseCase(
+    user_register_use_case = UserUseCase(
         user_use_case=users_repository, class_user_case=class_repository
     )
 
@@ -39,7 +41,7 @@ def test_user_nickname_exists():
 
 
 def test_user_name_contains_number():
-    user_register_use_case = UserRegisterUseCase(
+    user_register_use_case = UserUseCase(
         user_use_case=users_repository, class_user_case=class_repository
     )
 
@@ -55,7 +57,7 @@ def test_user_name_contains_number():
 
 
 def test_user_class_exists():
-    user_register_use_case = UserRegisterUseCase(
+    user_register_use_case = UserUseCase(
         user_use_case=users_repository, class_user_case=class_repository
     )
 
@@ -68,3 +70,18 @@ def test_user_class_exists():
         )
     except:
         assert pytest.raises(Exception, match="Essa classe não existe.")
+
+
+def test_user_finder():
+    user_finder = UserUseCase(users_repository, class_repository)
+    user = user_finder.find(1)
+    assert user
+    assert type(user["user_id"]) == int
+
+
+def test_use_not_found():
+    user_finder = UserUseCase(users_repository, class_repository)
+    try:
+        user_finder.find(3)
+    except:
+        assert pytest.raises(Exception, match="Usuário não encontrado.")

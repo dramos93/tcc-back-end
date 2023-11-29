@@ -5,7 +5,7 @@ from game.data.interfaces.multiplication_game_repository_interface import (
 )
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.multiplication_game_model import MultiplicationGameModel
-from game.domain.user_cases.multiplication_game.multiplication_game_interface import (
+from game.domain.use_cases.multiplication_game.multiplication_game_interface import (
     MultiplicationGameInterface,
 )
 

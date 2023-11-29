@@ -7,3 +7,7 @@ class UserControllerInterface(ABC):
     @abstractmethod
     def handle(self, http_request: HttpRequest) -> HttpResponse:
         pass
+
+    @abstractmethod
+    def create(self, http_request: HttpRequest) -> HttpResponse:
+        pass

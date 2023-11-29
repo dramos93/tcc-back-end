@@ -5,7 +5,7 @@ from game.data.interfaces.authentication_repository_interface import (
 )
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.authentication_model import AuthenticationModel
-from game.domain.user_cases.authentication.authentication_interface import (
+from game.domain.use_cases.authentication.authentication_interface import (
     AuthenticationUserCaseInterface,
 )
 
