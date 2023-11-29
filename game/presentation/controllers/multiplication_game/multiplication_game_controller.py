@@ -1,5 +1,5 @@
 from game.presentation.http_types.http_request import HttpRequest
-from game.domain.user_cases.multiplication_game.multiplication_game_interface import (
+from game.domain.use_cases.multiplication_game.multiplication_game_interface import (
     MultiplicationGameInterface,
 )
 from game.presentation.http_types.http_response import HttpResponse
@@ -29,7 +29,7 @@ class MultiplicationGameController(MultiplicationGameControllerInterface):
 
         return response
 
-    def get_token(self, http_request: HttpRequest) -> HttpResponse:
+    def get_all_multiplication_game(self, http_request: HttpRequest) -> HttpResponse:
         user_id = http_request.query_params["user_id"]
         class_id = http_request.query_params["class_id"]
         body = self.__use_case.get_multiplication_game(

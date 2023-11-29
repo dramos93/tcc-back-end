@@ -6,8 +6,19 @@ from game.presentation.controllers.user_controller.user_controller import (
 )
 
 
-def user_register_composer():
+def create_user_composer():
     user_repository = UsersRepository()
     class_repository = ClassRepository()
     use_case = UserUseCase(user_repository, class_repository)
     controller = CreateUserController(use_case)
+
+    return controller.create
+
+
+def handle_user_composer():
+    user_repository = UsersRepository()
+    class_repository = ClassRepository()
+    use_case = UserUseCase(user_repository, class_repository)
+    controller = CreateUserController(use_case)
+
+    return controller.handle

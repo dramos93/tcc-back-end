@@ -1,5 +1,5 @@
 from game.presentation.http_types.http_request import HttpRequest
-from game.domain.user_cases.authentication.authentication_interface import (
+from game.domain.use_cases.authentication.authentication_interface import (
     AuthenticationUserCaseInterface,
 )
 from game.presentation.http_types.http_response import HttpResponse
