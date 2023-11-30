@@ -18,15 +18,17 @@ class CreateUserController(UserControllerInterface):
         return response
 
     def create(self, http_request: HttpRequest) -> HttpResponse:
-        user_name = http_request.query_params["user_name"]
-        user_nickname = http_request.query_params["user_nickname"]
-        user_class_id = http_request.query_params["user_class_id"]
-        user_role = http_request.query_params["user_role"]
+        user_name = http_request.body["user_name"]
+        user_nickname = http_request.body["user_nickname"]
+        user_class_id = http_request.body["user_class_id"]
+        user_role = http_request.body["user_role"]
+        user_password = http_request.body["user_password"]
         body = self.__use_case.register(
             user_name=user_name,
             user_nickname=user_nickname,
             user_class_id=user_class_id,
             user_role=user_role,
+            user_password=user_password,
         )
         response = HttpResponse(body=body, status_code=200)
 

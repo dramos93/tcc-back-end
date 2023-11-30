@@ -5,8 +5,13 @@ from typing import Dict
 class UserInterface(ABC):
     @abstractmethod
     def register(
-        cls, user_name: str, user_nickname: str, user_class_id: int, user_role: int
-    ) -> Dict:
+        cls,
+        user_name: str,
+        user_nickname: str,
+        user_class_id: int,
+        user_role: int,
+        user_password: str,
+    ) -> None:
         pass
 
     @abstractmethod

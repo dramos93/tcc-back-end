@@ -7,7 +7,7 @@ from game.domain.models.multiplication_game_model import MultiplicationGameModel
 
 sample_entity = {
     "user_id": 1,
-    "class_id": 1,
+    "class_id": 2,
     "multiplication_table": 2,
     "round": 1,
     "errors": 3,
@@ -30,20 +30,16 @@ class MultiplicationGameRepositoryFake(MultiplicationGameRepositoryInterface):
     def get_all(cls, user_id: int, class_id: int) -> List[MultiplicationGameModel]:
         multiplication_games = [
             MultiplicationGameModel(
-                user_id=sample_entity["class_id"],
+                user_id=sample_entity["user_id"],
                 class_id=sample_entity["class_id"],
                 multiplication_table=sample_entity["multiplication_table"],
                 round=sample_entity["round"],
                 errors=sample_entity["errors"],
             )
         ]
-
         return (
             multiplication_games
-            if (
-                user_id
-                == sample_entity["user_id"] & class_id
-                == sample_entity["class_id"]
-            )
+            if (user_id == sample_entity["user_id"])
+            & (class_id == sample_entity["class_id"])
             else []
         )

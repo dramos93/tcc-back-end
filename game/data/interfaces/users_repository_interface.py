@@ -7,7 +7,12 @@ from game.infra.db.entities.user_entity import UsersEntity
 class UsersRepositoryInterface(ABC):
     @abstractmethod
     def insert_user(
-        cls, user_name: str, user_nickname: str, user_class_id: int, user_role: int
+        cls,
+        user_name: str,
+        user_nickname: str,
+        user_class_id: int,
+        user_role: int,
+        user_password: str,
     ) -> None:
         pass
 

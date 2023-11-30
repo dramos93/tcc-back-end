@@ -15,29 +15,35 @@ class UserUseCase(UserInterface):
         self.__class_user_case = class_user_case
 
     def find(self, user_id: int) -> Dict:
-        user = self.__search_user(user_id)
-        response = self.__format__response(user)
+        user = self.__search_user(user_id=user_id)
+        response = self.__format__response(user=user)
 
         return response
 
     def register(
-        self, user_name: str, user_nickname: str, user_class_id: int, user_role: int
+        self,
+        user_name: str,
+        user_nickname: str,
+        user_class_id: int,
+        user_role: int,
+        user_password: str,
     ) -> None:
         # Validar se o nickname já existe
-        self.__user_nickname_exists(user_nickname=user_name)
+        self.__user_nickname_exists(user_nickname=user_nickname)
 
         # Validar a string
-        self.__validate_name(user_name)
+        self.__validate_name(name=user_name)
         # self.__validate_name(user_nickname)
 
         # Certifica se existe a classe buscando do repositório da Classe.
-        self.__user_class_exists(user_class_id)
+        self.__user_class_exists(class_id=user_class_id)
 
         self.__user_repository.insert_user(
             user_name=user_name,
             user_nickname=user_nickname,
             user_class_id=user_class_id,
             user_role=user_role,
+            user_password=user_password,
         )
 
     def __user_nickname_exists(self, user_nickname: str) -> None:

@@ -6,7 +6,7 @@ class HttpRequest:
         self,
         query_params,
         headers=None,
-        body=None,
+        body: dict = {},
         path_params=None,
         url=None,
         ipv4=None,

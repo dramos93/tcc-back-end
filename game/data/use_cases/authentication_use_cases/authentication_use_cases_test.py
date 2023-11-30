@@ -36,20 +36,11 @@ def test_logout():
 
 
 def test_user_not_found():
-    try:
+    with pytest.raises(Exception, match="Usuário não encontrado."):
         authentication_use_case.create_token(user_id=999)
-        assert False
-    except:
-        assert pytest.raises(Exception, match="Usuário não encontrado.")
 
-    try:
+    with pytest.raises(Exception, match="Usuário não encontrado."):
         authentication_use_case.get_token(user_id=999)
-        assert False
-    except:
-        assert pytest.raises(Exception, match="Usuário não encontrado.")
 
-    try:
+    with pytest.raises(Exception, match="Usuário não encontrado."):
         authentication_use_case.logout(user_id=999, token=uuid1())
-        assert False
-    except:
-        assert pytest.raises(Exception, match="Usuário não encontrado.")

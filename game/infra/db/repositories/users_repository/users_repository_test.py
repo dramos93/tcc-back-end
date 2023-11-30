@@ -23,15 +23,18 @@ def test_get_all():
 def test_get_by_id():
     user_repository = UsersRepository()
     print()
-    user_repository = user_repository.get_user_by_id(1)
-    assert user_repository.user_id == 1
-    assert user_repository.user_class_id == 1
-    assert user_repository.user_name == "Daniel"
-    assert user_repository.user_nickname == "dramos933"
-    assert user_repository.user_role == 1
-    assert user_repository.user_active == 1
+    user_repository_result = user_repository.get_user_by_id(1)
+    assert user_repository_result.user_id == 1
+    assert user_repository_result.user_class_id == 1
+    assert user_repository_result.user_name == "Daniel"
+    assert user_repository_result.user_nickname == "dramos933"
+    assert user_repository_result.user_role == 1
+    assert user_repository_result.user_active == 1
 
-    print()
+
+def test_get_by_id_not_found():
+    user_repository = UsersRepository()
+    assert user_repository.get_user_by_id(10000) is None
 
 
 def test_nick_name_exists():

@@ -60,6 +60,7 @@ class UsersRepository(UsersRepositoryInterface):
                 return entity
 
             except Exception as exception:
+                breakpoint()
                 db.session.rollback()
                 raise exception
 

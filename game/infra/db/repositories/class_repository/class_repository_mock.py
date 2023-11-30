@@ -9,9 +9,13 @@ class ClassRepositoryMock(ClassRepositoryInterface):
 
     @classmethod
     def get_by_id(cls, class_id: int) -> ClassModel:
-        class_fake = ClassModel(class_id=1, class_name="1ª Série", class_active=True)
-        return class_fake
+        class_fake = {
+            1: ClassModel(class_id=1, class_name="1ª Série", class_active=True),
+            2: ClassModel(class_id=2, class_name="2ª Série", class_active=True),
+        }
+        return class_fake[class_id]
 
     @classmethod
     def exists(cls, class_id: int) -> bool:
-        return True if class_id == 1 else False
+        class_ids = [1, 2]
+        return True if class_id in class_ids else False

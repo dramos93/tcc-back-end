@@ -6,7 +6,12 @@ from game.domain.models.users import Users
 class UsersRepositoryMock(UsersRepositoryInterface):
     @classmethod
     def insert_user(
-        cls, user_name: str, user_nickname: str, user_class_id: int, user_role: int
+        cls,
+        user_name: str,
+        user_nickname: str,
+        user_class_id: int,
+        user_role: int,
+        user_password: str,
     ) -> None:
         pass
 
@@ -15,8 +20,8 @@ class UsersRepositoryMock(UsersRepositoryInterface):
         return [Users(1, "Daniel", "dramos93", 1, 1, True)]
 
     @classmethod
-    def get_user_by_id(cls, user_id: int) -> Users:
-        return Users(1, "Daniel", "dramos93", 1, 1, True)
+    def get_user_by_id(cls, user_id: int) -> Users | None:
+        return Users(1, "Daniel", "dramos93", 1, 1, True) if user_id == 1 else None
 
     @classmethod
     def nick_name_exists(cls, user_nick_name: str) -> bool:
