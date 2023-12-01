@@ -25,13 +25,14 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
                 )
                 db.session.execute(query)
                 db.session.add(new_data)
-                db.session.expire_on_commit = False
+                # db.session.expire_on_commit = False
                 db.session.commit()
-                return new_data
+                db.session.refresh(new_data)
             except Exception as exception:
                 breakpoint()
                 db.session.rollback()
                 raise exception
+        return new_data
 
     @classmethod
     def get_token(cls, user_id: int) -> AuthenticationModel:
