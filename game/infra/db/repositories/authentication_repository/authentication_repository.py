@@ -13,24 +13,22 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
     @classmethod
     def create(cls, user_id: int) -> AuthenticationModel:
         with DBConnectionHandler() as db:
+            engine = db.get_engine()
+            UsersEntity.create_table(engine)
+            AuthenticationEntity.create_table(engine=engine)
+            query = (
+                update(AuthenticationEntity)
+                .filter(AuthenticationEntity.user_id == user_id)
+                .values(active=False)
+            )
+            inse = insert(AuthenticationEntity).values(user_id=user_id).returning(AuthenticationEntity)
+            db.session.execute(query)
+            new_data = db.session.execute(inse).scalar()
             try:
-                engine = db.get_engine()
-                UsersEntity.create_table(engine)
-                AuthenticationEntity.create_table(engine=engine)
-                query = (
-                    update(AuthenticationEntity)
-                    .filter(AuthenticationEntity.user_id == user_id)
-                    .values(active=False)
-                )
-                new_data = insert(AuthenticationEntity).values(user_id=user_id).returning(AuthenticationEntity)
-                db.session.execute(query)
-                new_data = db.session.execute(new_data).scalar()
-                # db.session.expire_on_commit = False
-                # ret = db.session.get(AuthenticationEntity, new_data.token)
-                # new_data = new_data.
                 db.session.commit()
                 db.session.refresh(new_data)
-                # db.session.reset()
+                db.session.reset()
+                # db.session.expire(new_data)
             except Exception as exception:
                 breakpoint()
                 db.session.rollback()
