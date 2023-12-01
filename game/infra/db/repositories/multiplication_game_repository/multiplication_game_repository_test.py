@@ -24,11 +24,11 @@ def test_get_all_from_multiplication_game_table():
     data = multiplication_game_repository.get_all(
         user_id=sample_entity["user_id"], class_id=sample_entity["class_id"]
     )
-    assert data[0].user_id == sample_entity["user_id"]
-    assert data[0].class_id == sample_entity["class_id"]
-    assert data[0].multiplication_table == sample_entity["multiplication_table"]
-    assert data[0].round == sample_entity["round"]
-    assert data[0].errors == sample_entity["errors"]
+    assert data[-1].user_id == sample_entity["user_id"]
+    assert data[-1].class_id == sample_entity["class_id"]
+    assert data[-1].multiplication_table == sample_entity["multiplication_table"]
+    assert data[-1].round == sample_entity["round"]
+    assert data[-1].errors == sample_entity["errors"]
 
 
 def test_get_all_if_not_exists():

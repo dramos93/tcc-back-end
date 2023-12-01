@@ -13,8 +13,11 @@ class AuthenticationController(AuthenticationControllerInterface):
         self.__use_case = use_case
 
     def create_token(self, http_request: HttpRequest) -> HttpResponse:
-        user_id = http_request.query_params["user_id"]
-        body = self.__use_case.create_token(user_id=user_id)
+        user_id = http_request.body["user_id"]
+        user_password = http_request.body["user_password"]
+        body = self.__use_case.create_token(
+            user_id=user_id, user_password=user_password
+        )
         response = HttpResponse(body=body, status_code=200)
 
         return response
@@ -27,8 +30,8 @@ class AuthenticationController(AuthenticationControllerInterface):
         return response
 
     def logout(self, http_request: HttpRequest) -> HttpResponse:
-        user_id = http_request.query_params["user_id"]
-        token = http_request.query_params["token"]
+        user_id = http_request.body["user_id"]
+        token = http_request.body["token"]
         body = self.__use_case.logout(user_id=user_id, token=token)
         response = HttpResponse(body=body, status_code=200)
 

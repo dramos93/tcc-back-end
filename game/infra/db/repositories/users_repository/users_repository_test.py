@@ -1,3 +1,5 @@
+import math
+from pickletools import pyset
 from game.infra.db.repositories.users_repository.users_repository import UsersRepository
 import pytest
 
@@ -42,3 +44,8 @@ def test_nick_name_exists():
     print()
     assert users_repository.nick_name_exists("dramos933")
     assert users_repository.nick_name_exists("qualquer") == False
+
+
+def test_login():
+    users_repository = UsersRepository()
+    assert users_repository.login(user_id=1, user_password="123456")

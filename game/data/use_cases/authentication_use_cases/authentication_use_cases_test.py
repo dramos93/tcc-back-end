@@ -19,7 +19,7 @@ authentication_use_case = AuthenticationUseCases(
 
 
 def test_create_authentication_user_case():
-    authentication_use_case.create_token(user_id=1)
+    authentication_use_case.create_token(user_id=1, user_password="123456")
 
 
 def test_get_token():
@@ -37,10 +37,12 @@ def test_logout():
 
 def test_user_not_found():
     with pytest.raises(Exception, match="Usuário não encontrado."):
-        authentication_use_case.create_token(user_id=999)
-
-    with pytest.raises(Exception, match="Usuário não encontrado."):
         authentication_use_case.get_token(user_id=999)
 
     with pytest.raises(Exception, match="Usuário não encontrado."):
         authentication_use_case.logout(user_id=999, token=uuid1())
+
+
+def test_user_no_login():
+    with pytest.raises(Exception, match="Usuário ou senha não existe."):
+        authentication_use_case.create_token(user_id=1, user_password="ABC")

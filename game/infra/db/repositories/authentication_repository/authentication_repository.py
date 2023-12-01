@@ -11,27 +11,24 @@ from game.infra.db.settings.connection import DBConnectionHandler
 
 class AuthenticationRepository(AuthenticationRepositoryInterface):
     @classmethod
-    def create(cls, user_id: int) -> None:
+    def create(cls, user_id: int) -> AuthenticationModel:
         with DBConnectionHandler() as db:
             try:
                 engine = db.get_engine()
                 UsersEntity.create_table(engine)
                 AuthenticationEntity.create_table(engine=engine)
-
                 new_data = AuthenticationEntity(user_id=user_id)
-
                 query = (
                     update(AuthenticationEntity)
                     .filter(AuthenticationEntity.user_id == user_id)
                     .values(active=False)
                 )
                 db.session.execute(query)
-
                 db.session.add(new_data)
-                db.session.commit()
+                return new_data
             except Exception as exception:
-                db.session.rollback()
                 breakpoint()
+                db.session.rollback()
                 raise exception
 
     @classmethod

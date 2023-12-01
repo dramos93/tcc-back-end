@@ -77,3 +77,22 @@ class UsersRepository(UsersRepositoryInterface):
             except Exception as exception:
                 db.session.rollback()
                 raise exception
+
+    @classmethod
+    def login(cls, user_id: int, user_password: str) -> bool:
+        with DBConnectionHandler() as db:
+            try:
+                query = (
+                    db.session.query(UsersEntity)
+                    .filter(
+                        (UsersEntity.user_id == user_id)
+                        & (UsersEntity.user_password == user_password)
+                    )
+                    .exists()
+                )
+                return db.session.query(query).scalar()
+
+            except Exception as exception:
+                breakpoint()
+                db.session.rollback()
+                raise exception

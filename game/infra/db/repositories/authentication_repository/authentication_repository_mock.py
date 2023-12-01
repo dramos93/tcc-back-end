@@ -11,8 +11,11 @@ authentication_mock = {"token": uuid1(), "created_on": date.today(), "active": T
 
 class AuthenticationRepositoryMock(AuthenticationRepositoryInterface):
     @classmethod
-    def create(cls, user_id: int) -> None:
-        pass
+    def create(cls, user_id: int) -> AuthenticationModel:
+        authentication_model = AuthenticationModel(
+            **authentication_mock, user_id=user_id
+        )
+        return authentication_model
 
     @classmethod
     def get_token(cls, user_id: int) -> AuthenticationModel:

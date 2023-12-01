@@ -10,7 +10,7 @@ from game.presentation.controllers.authentication_controller.authentication_cont
 )
 
 
-def authentication_create_token_composer():
+def create_token_composer():
     authentication_repository = AuthenticationRepository()
     user_repository = UsersRepository()
     use_cases = AuthenticationUseCases(authentication_repository, user_repository)
@@ -18,7 +18,7 @@ def authentication_create_token_composer():
     return controller.create_token
 
 
-def authentication_get_token_composer():
+def get_token_composer():
     authentication_repository = AuthenticationRepository()
     user_repository = UsersRepository()
     use_cases = AuthenticationUseCases(authentication_repository, user_repository)
@@ -26,7 +26,7 @@ def authentication_get_token_composer():
     return controller.get_token
 
 
-def authentication_logout_composer():
+def logout_composer():
     authentication_repository = AuthenticationRepository()
     user_repository = UsersRepository()
     use_cases = AuthenticationUseCases(authentication_repository, user_repository)

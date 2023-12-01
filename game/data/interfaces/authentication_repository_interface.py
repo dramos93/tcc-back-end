@@ -5,7 +5,7 @@ from game.domain.models.authentication_model import AuthenticationModel
 
 class AuthenticationRepositoryInterface(ABC):
     @abstractmethod
-    def create(cls, user_id: int) -> None:
+    def create(cls, user_id: int) -> AuthenticationModel:
         pass
 
     @abstractmethod

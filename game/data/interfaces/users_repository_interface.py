@@ -27,3 +27,7 @@ class UsersRepositoryInterface(ABC):
     @abstractmethod
     def nick_name_exists(cls, user_nickname: str) -> bool:
         pass
+
+    @abstractmethod
+    def login(cls, user_id: int, user_password: str) -> bool:
+        ...

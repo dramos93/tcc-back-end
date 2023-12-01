@@ -13,11 +13,11 @@ class MultiplicationGameController(MultiplicationGameControllerInterface):
         self.__use_case = use_case
 
     def create_multiplication_game(self, http_request: HttpRequest) -> HttpResponse:
-        user_id = http_request.query_params["user_id"]
-        class_id = http_request.query_params["class_id"]
-        multiplication_table = http_request.query_params["multiplication_table"]
-        round = http_request.query_params["round"]
-        errors = http_request.query_params["errors"]
+        user_id = http_request.body["user_id"]
+        class_id = http_request.body["class_id"]
+        multiplication_table = http_request.body["multiplication_table"]
+        round = http_request.body["round"]
+        errors = http_request.body["errors"]
         body = self.__use_case.create_multiplication_game(
             user_id=user_id,
             class_id=class_id,
