@@ -25,6 +25,8 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
                 )
                 db.session.execute(query)
                 db.session.add(new_data)
+                db.session.expire_on_commit = False
+                db.session.commit()
                 return new_data
             except Exception as exception:
                 breakpoint()

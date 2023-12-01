@@ -8,7 +8,6 @@ class DBConnectionHandler:
     def __init__(self) -> None:
         self.__connection_string = "postgresql://postgres:123456@localhost:5432/game"
         self.__engine = self.__create_database_engine()
-        # self.session = None
 
     def __create_database_engine(self):
         engine = create_engine(self.__connection_string)
