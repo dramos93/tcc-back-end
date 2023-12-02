@@ -1,12 +1,11 @@
-from typing import Dict
-
+# from starlette.datastructures import Headers
 
 class HttpRequest:
     def __init__(
         self,
         query_params,
-        headers=None,
-        body: dict = {},
+        headers,
+        body,
         path_params=None,
         url=None,
         ipv4=None,

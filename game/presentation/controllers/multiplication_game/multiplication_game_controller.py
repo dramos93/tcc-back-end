@@ -26,7 +26,6 @@ class MultiplicationGameController(MultiplicationGameControllerInterface):
             errors=errors,
         )
         response = HttpResponse(body=body, status_code=200)
-
         return response
 
     def get_all_multiplication_game(self, http_request: HttpRequest) -> HttpResponse:

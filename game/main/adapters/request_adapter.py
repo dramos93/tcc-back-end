@@ -7,7 +7,7 @@ from fastapi import Request
 async def request_adapter(request: Request, controller: Callable) -> HttpResponse:
     body = {}
     if request.body:
-        body = await request.json()
+        body = request.body
     http_request = HttpRequest(
         body=body,
         headers=request.headers,
