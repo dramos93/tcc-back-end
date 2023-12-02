@@ -1,4 +1,5 @@
 from uuid import UUID, uuid1
+import uuid
 from sqlalchemy import insert, select, update
 from game.data.interfaces.authentication_repository_interface import (
     AuthenticationRepositoryInterface,
@@ -16,7 +17,11 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
             engine = db.get_engine()
             UsersEntity.create_table(engine)
             AuthenticationEntity.create_table(engine=engine)
-            inse = insert(AuthenticationEntity).values(user_id=user_id, token=uuid1()).returning(AuthenticationEntity)
+            inse = (
+                insert(AuthenticationEntity)
+                .values(user_id=user_id, token=uuid1())
+                .returning(AuthenticationEntity)
+            )
             new_data = db.session.execute(inse).scalar()
             try:
                 db.session.commit()
@@ -28,12 +33,11 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
         return new_data
 
     @classmethod
-    def get_token(cls, user_id: int) -> AuthenticationModel:
+    def get_credentials_from_token(cls, token: UUID) -> AuthenticationModel:
         with DBConnectionHandler() as db:
             try:
                 query = select(AuthenticationEntity).filter(
-                    (AuthenticationEntity.active)
-                    & (AuthenticationEntity.user_id == user_id)
+                    (AuthenticationEntity.token == token)
                 )
                 data = db.session.execute(query).scalar()
 

@@ -21,7 +21,10 @@ class UsersRepositoryMock(UsersRepositoryInterface):
 
     @classmethod
     def get_user_by_id(cls, user_id: int) -> Users | None:
-        return Users(1, "Daniel", "dramos93", 1, 1, True) if user_id == 1 else None
+        if user_id == 1:
+            return Users(1, "Daniel", "dramos93", 1, 1, True)
+        else:
+            return None
 
     @classmethod
     def nick_name_exists(cls, user_nick_name: str) -> bool:

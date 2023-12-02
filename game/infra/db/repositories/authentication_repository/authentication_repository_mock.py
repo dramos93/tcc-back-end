@@ -1,5 +1,5 @@
 from datetime import date
-from uuid import UUID, uuid1
+from uuid import UUID, uuid1, getnode
 from game.data.interfaces.authentication_repository_interface import (
     AuthenticationRepositoryInterface,
 )
@@ -18,12 +18,10 @@ class AuthenticationRepositoryMock(AuthenticationRepositoryInterface):
         return authentication_model
 
     @classmethod
-    def get_token(cls, user_id: int) -> AuthenticationModel:
-        authentication_model = AuthenticationModel(
-            **authentication_mock, user_id=user_id
-        )
-        return authentication_model
-
-    @classmethod
     def logout(cls, user_id: int, token: UUID) -> None:
         pass
+
+    @classmethod
+    def get_credentials_from_token(cls, token: UUID) -> AuthenticationModel:
+        authentication_model = AuthenticationModel(**authentication_mock, user_id=1)
+        return authentication_model

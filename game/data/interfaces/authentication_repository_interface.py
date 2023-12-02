@@ -9,7 +9,7 @@ class AuthenticationRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def get_token(cls, user_id: int) -> AuthenticationModel:
+    def get_credentials_from_token(cls, user_id: UUID) -> AuthenticationModel:
         pass
 
     @abstractmethod

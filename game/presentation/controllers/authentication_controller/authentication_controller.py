@@ -23,8 +23,8 @@ class AuthenticationController(AuthenticationControllerInterface):
         return response
 
     def get_token(self, http_request: HttpRequest) -> HttpResponse:
-        user_id = http_request.query_params["user_id"]
-        body = self.__use_case.get_token(user_id=user_id)
+        token = http_request.query_params["token"]
+        body = self.__use_case.get_user_permissions(token)
         response = HttpResponse(body=body, status_code=200)
 
         return response
