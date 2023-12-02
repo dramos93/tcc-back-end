@@ -12,11 +12,9 @@ class ClassRepository(ClassRepositoryInterface):
             try:
                 engine = db.get_engine()
                 ClassEntity.create_table(engine=engine)
-
                 new_class = ClassEntity(
                     class_name=class_name, class_active=class_active
                 )
-
                 db.session.add(new_class)
                 db.session.commit()
             except Exception as exception:
@@ -29,7 +27,6 @@ class ClassRepository(ClassRepositoryInterface):
             try:
                 query = select(ClassEntity).filter(ClassEntity.class_id == class_id)
                 class_entity = db.session.execute(query).scalar()
-
                 return class_entity
             except Exception as exception:
                 db.session.rollback()
@@ -42,7 +39,6 @@ class ClassRepository(ClassRepositoryInterface):
                 query = (
                     select(ClassEntity).where(ClassEntity.class_id == class_id).exists()
                 )
-
                 return db.session.query(query).scalar()
             except Exception as exception:
                 db.session.rollback()
