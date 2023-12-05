@@ -22,7 +22,7 @@ class AuthenticationController(AuthenticationControllerInterface):
         return response
 
     def get_token(self, http_request: HttpRequest) -> HttpResponse:
-        token = http_request.headers['token']
+        token = http_request.headers["token"]
         body = self.__use_case.get_user_permissions(token)
         response = HttpResponse(body=body, status_code=200)
         return response

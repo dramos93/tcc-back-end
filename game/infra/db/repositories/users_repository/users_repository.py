@@ -96,3 +96,11 @@ class UsersRepository(UsersRepositoryInterface):
                 breakpoint()
                 db.session.rollback()
                 raise exception
+
+    @classmethod
+    def get_students_by_class(cls, class_id: int) -> List[Users]:
+        with DBConnectionHandler() as db:
+            script = select(UsersEntity).filter(UsersEntity.user_class_id == class_id)
+            data = db.session.execute(script).scalars()
+
+        return list(data)

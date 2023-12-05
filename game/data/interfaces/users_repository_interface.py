@@ -31,3 +31,7 @@ class UsersRepositoryInterface(ABC):
     @abstractmethod
     def login(cls, user_id: int, user_password: str) -> bool:
         ...
+
+    @abstractmethod
+    def get_students_by_class(cls, class_id: int) -> Users:
+        ...
