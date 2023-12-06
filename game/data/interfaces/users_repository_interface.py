@@ -10,7 +10,6 @@ class UsersRepositoryInterface(ABC):
         cls,
         user_name: str,
         user_nickname: str,
-        user_class_id: int,
         user_role: int,
         user_password: str,
     ) -> None:
@@ -30,8 +29,4 @@ class UsersRepositoryInterface(ABC):
 
     @abstractmethod
     def login(cls, user_id: int, user_password: str) -> bool:
-        ...
-
-    @abstractmethod
-    def get_students_by_class(cls, class_id: int) -> Users:
         ...

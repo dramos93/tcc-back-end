@@ -10,7 +10,6 @@ class UsersRepository(UsersRepositoryInterface):
     @classmethod
     def insert_user(
         cls,
-        user_class_id: int,
         user_name: str,
         user_nickname: str,
         user_password: str,
@@ -25,7 +24,6 @@ class UsersRepository(UsersRepositoryInterface):
                 new_register = UsersEntity(
                     user_name=user_name,
                     user_nickname=user_nickname,
-                    user_class_id=user_class_id,
                     user_password=user_password,
                     user_role=user_role,
                     user_active=user_active,
@@ -96,11 +94,3 @@ class UsersRepository(UsersRepositoryInterface):
                 breakpoint()
                 db.session.rollback()
                 raise exception
-
-    @classmethod
-    def get_students_by_class(cls, class_id: int) -> List[Users]:
-        with DBConnectionHandler() as db:
-            script = select(UsersEntity).filter(UsersEntity.user_class_id == class_id)
-            data = db.session.execute(script).scalars()
-
-        return list(data)

@@ -8,7 +8,6 @@ class UserInterface(ABC):
         cls,
         user_name: str,
         user_nickname: str,
-        user_class_id: int,
         user_role: int,
         user_password: str,
     ) -> None:

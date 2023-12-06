@@ -1,5 +1,4 @@
 from typing import Dict
-from game.data.interfaces.class_repository_interface import ClassRepositoryInterface
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.users import Users
 from game.domain.use_cases.user.user_interface import UserInterface
@@ -9,10 +8,8 @@ class UserUseCase(UserInterface):
     def __init__(
         self,
         user_use_case: UsersRepositoryInterface,
-        class_user_case: ClassRepositoryInterface,
     ) -> None:
         self.__user_repository = user_use_case
-        self.__class_user_case = class_user_case
 
     def find(self, user_id: int) -> Dict:
         user = self.__search_user(user_id=user_id)
@@ -24,7 +21,6 @@ class UserUseCase(UserInterface):
         self,
         user_name: str,
         user_nickname: str,
-        user_class_id: int,
         user_role: int,
         user_password: str,
     ) -> None:
@@ -35,13 +31,9 @@ class UserUseCase(UserInterface):
         self.__validate_name(name=user_name)
         # self.__validate_name(user_nickname)
 
-        # Certifica se existe a classe buscando do repositório da Classe.
-        self.__user_class_exists(class_id=user_class_id)
-
         self.__user_repository.insert_user(
             user_name=user_name,
             user_nickname=user_nickname,
-            user_class_id=user_class_id,
             user_role=user_role,
             user_password=user_password,
         )
@@ -54,10 +46,6 @@ class UserUseCase(UserInterface):
     def __validate_name(cls, name: str) -> None:
         if not name.isalpha():
             raise Exception("Deve conter só letra.")
-
-    def __user_class_exists(self, class_id: int) -> None:
-        if not self.__class_user_case.exists(class_id=class_id):
-            raise Exception("Essa classe não existe.")
 
     def __search_user(self, user_id: int) -> Users:
         user = self.__user_repository.get_user_by_id(user_id=user_id)

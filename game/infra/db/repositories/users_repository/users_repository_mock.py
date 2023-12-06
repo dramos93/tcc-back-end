@@ -9,7 +9,6 @@ class UsersRepositoryMock(UsersRepositoryInterface):
         cls,
         user_name: str,
         user_nickname: str,
-        user_class_id: int,
         user_role: int,
         user_password: str,
     ) -> None:
@@ -17,12 +16,12 @@ class UsersRepositoryMock(UsersRepositoryInterface):
 
     @classmethod
     def get_all_users(cls) -> List[Users]:
-        return [Users(1, "Daniel", "dramos93", 1, 1, True)]
+        return [Users(1, "Daniel", "dramos93", 1, True)]
 
     @classmethod
     def get_user_by_id(cls, user_id: int) -> Users | None:
         if user_id == 1:
-            return Users(1, "Daniel", "dramos93", 1, 1, True)
+            return Users(1, "Daniel", "dramos93", 1, True)
         else:
             return None
 

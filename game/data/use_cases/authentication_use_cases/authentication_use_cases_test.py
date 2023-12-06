@@ -55,7 +55,6 @@ def test_get_role_from_user_with_toke():
     assert permissions["created_on"] == auth_repo.created_on
     assert permissions["active"] == auth_repo.active
     if user:
-        assert permissions["class_id"] == user.user_class_id
         assert permissions["user_name"] == user.user_name
         assert permissions["user_nickname"] == user.user_nickname
         assert permissions["user_role"] == user.user_role

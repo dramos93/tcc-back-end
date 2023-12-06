@@ -1,5 +1,3 @@
-import math
-from pickletools import pyset
 from game.infra.db.repositories.users_repository.users_repository import UsersRepository
 import pytest
 
@@ -8,7 +6,6 @@ import pytest
 def test_create_user():
     user_repository = UsersRepository()
     user_repository.insert_user(
-        user_class_id=1,
         user_name="Daniel",
         user_nickname="dramos933",
         user_password="123456",
@@ -27,7 +24,6 @@ def test_get_by_id():
     print()
     user_repository_result = user_repository.get_user_by_id(1)
     assert user_repository_result.user_id == 1
-    assert user_repository_result.user_class_id == 1
     assert user_repository_result.user_name == "Daniel"
     assert user_repository_result.user_nickname == "dramos933"
     assert user_repository_result.user_role == 1

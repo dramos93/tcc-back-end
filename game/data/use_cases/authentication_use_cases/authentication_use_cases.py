@@ -44,7 +44,6 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
             "token": authentication.token,
             "created_on": authentication.created_on,
             "active": authentication.active,
-            "class_id": user.user_class_id,
             "user_name": user.user_name,
             "user_nickname": user.user_nickname,
             "user_role": user.user_role,
