@@ -12,7 +12,7 @@ from game.domain.models.users import Users
 from game.domain.use_cases.classes.class_interface import ClassesInterface
 
 
-class Classes(ClassesInterface):
+class ClassesUseCase(ClassesInterface):
     def __init__(
         self,
         class_repository: ClassRepositoryInterface,
@@ -53,7 +53,7 @@ class Classes(ClassesInterface):
                     "students": [
                         {
                             "name": user.user_name,
-                            "rounds": list(self.__get_results(class_id, user.user_id))
+                            "rounds": list(self.__get_results(class_id, user.user_id)),
                         }
                         for user in users
                     ],
@@ -73,7 +73,9 @@ class Classes(ClassesInterface):
         round_results = []
 
         for result in results_from_user:
-            round_results[result.round].append({"table": result.multiplication_table, "errors": result.errors})
+            round_results[result.round].append(
+                {"table": result.multiplication_table, "errors": result.errors}
+            )
 
         for round_num, results in round_results.items():
             sum_of_round_errors = sum(result["errors"] for result in results)

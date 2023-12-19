@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, status
-from fastapi.security import APIKeyHeader
+from fastapi import APIRouter, HTTPException, Request, status
 from game.main.adapters.request_adapter import request_adapter
 from game.main.composers.users_composers import (
     create_user_composer,
@@ -14,11 +13,14 @@ from game.main.composers.multiplication_game_composer import (
     create_multiplication_game_composer,
     get_all_multiplication_game_composer,
 )
+from game.main.composers.classes_composer import get_class_composer
 
 user_router = APIRouter()
 multiplication_game_router = APIRouter()
 authentication_router = APIRouter()
+classes_router = APIRouter()
 
+# from fastapi.security import APIKeyHeader
 # api_key_header = APIKeyHeader(name="x-api-key")
 
 
@@ -85,5 +87,13 @@ async def logout(request: Request):
     try:
         http_response = await request_adapter(request, logout_composer())
         return http_response
+    except Exception as e:
+        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
+
+
+@classes_router.get("/get_class_from_teacher")
+async def get_class_from_teacher(request: Request):
+    try:
+        http_response = await request_adapter(request, get_class_composer())
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)

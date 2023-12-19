@@ -1,5 +1,6 @@
 from typing import List
 from sqlalchemy import insert, select
+from sqlalchemy.exc import SQLAlchemyError
 from game.data.interfaces.class_user_repository_interface import (
     ClassUserRepositoryInterface,
 )
@@ -38,16 +39,16 @@ class ClassUserRepository(ClassUserRepositoryInterface):
     def get_classes(cls, user_id: int) -> List[ClassUserModel]:
         with DBConnectionHandler() as db:
             engine = db.get_engine()
+            UsersEntity.create_table(engine=engine)
             ClassUserEntity.create_table(engine=engine)
 
             class_user = select(ClassUserEntity).filter(
                 ClassUserEntity.user_id == user_id
             )
             try:
-                data = db.session.execute(class_user).scalars()
-                db.session.commit()
+                data = db.session.execute(class_user).scalars().all()
 
-            except Exception as exception:
+            except SQLAlchemyError as exception:
                 db.session.rollback()
                 raise exception
 
@@ -63,8 +64,7 @@ class ClassUserRepository(ClassUserRepositoryInterface):
                 ClassUserEntity.class_id == class_id
             )
             try:
-                data = db.session.execute(class_user).scalars()
-                db.session.commit()
+                data = db.session.execute(class_user).scalars().all()
 
             except Exception as exception:
                 db.session.rollback()
