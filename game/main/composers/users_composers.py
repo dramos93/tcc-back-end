@@ -11,14 +11,11 @@ def create_user_composer():
     class_repository = ClassRepository()
     use_case = UserUseCase(user_repository, class_repository)
     controller = CreateUserController(use_case)
-
     return controller.create
 
 
 def handle_user_composer():
     user_repository = UsersRepository()
-    class_repository = ClassRepository()
-    use_case = UserUseCase(user_repository, class_repository)
+    use_case = UserUseCase(user_repository)
     controller = CreateUserController(use_case)
-
     return controller.handle

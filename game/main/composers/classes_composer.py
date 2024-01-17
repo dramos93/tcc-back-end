@@ -17,6 +17,7 @@ def get_class_composer():
     user_repository = UsersRepository()
     game_repository = MultiplicationGameRepository()
     class_user_repository = ClassUserRepository()
+
     classes_use_case = ClassesUseCase(
         class_repository=class_repository,
         user_repository=user_repository,

@@ -9,10 +9,10 @@ from game.data.interfaces.multiplication_game_repository_interface import (
 from game.data.interfaces.users_repository_interface import UsersRepositoryInterface
 from game.domain.models.class_user_model import ClassUserModel
 from game.domain.models.users import Users
-from game.domain.use_cases.classes.class_interface import ClassesInterface
+from game.domain.use_cases.classes.class_interface import ClassesUseCaseInterface
 
 
-class ClassesUseCase(ClassesInterface):
+class ClassesUseCase(ClassesUseCaseInterface):
     def __init__(
         self,
         class_repository: ClassRepositoryInterface,
@@ -38,10 +38,10 @@ class ClassesUseCase(ClassesInterface):
         """
         class_from_teacher = self.class_user_repository.get_classes(user_id=user_id)
         classes = []
-        for class_id in class_from_teacher:
+        for c in class_from_teacher:
             users_id: List[
                 ClassUserModel
-            ] = self.class_user_repository.get_users_from_class(class_id=class_id)
+            ] = self.class_user_repository.get_users_from_class(class_id=c.class_id)
             users: List[Users] = [
                 self.user_repository.get_user_by_id(user_id=user.user_id)
                 for user in users_id
@@ -49,11 +49,13 @@ class ClassesUseCase(ClassesInterface):
 
             classes.append(
                 {
-                    "className": self.__get_class_name(class_id=class_id),
+                    "className": self.__get_class_name(class_id=c.class_id),
                     "students": [
                         {
                             "name": user.user_name,
-                            "rounds": list(self.__get_results(class_id, user.user_id)),
+                            "rounds": list(
+                                self.__get_results(c.class_id, user.user_id)
+                            ),
                         }
                         for user in users
                     ],
@@ -70,13 +72,20 @@ class ClassesUseCase(ClassesInterface):
         results_from_user = self.game_repository.get_all(
             class_id=class_id, user_id=user_id
         )
-        round_results = []
-
+        round_results: dict = {}
         for result in results_from_user:
-            round_results[result.round].append(
-                {"table": result.multiplication_table, "errors": result.errors}
+            round_results.update(
+                {
+                    result.round: [
+                        *round_results.get(result.round),
+                        {"table": result.multiplication_table, "errors": result.errors},
+                    ]
+                    if round_results.get(result.round)
+                    else [
+                        {"table": result.multiplication_table, "errors": result.errors}
+                    ]
+                }
             )
-
         for round_num, results in round_results.items():
             sum_of_round_errors = sum(result["errors"] for result in results)
             yield {
