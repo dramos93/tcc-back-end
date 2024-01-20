@@ -26,10 +26,12 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
         user = self.__user(new_auth.user_id)
         return self.__ajust_response(new_auth, user)
 
-    def get_user_permissions(self, token: UUID) -> Dict:
+    def get_user_permissions(self, token: UUID) -> Dict | None:
         authentication_repository = (
             self.authentication_repository.get_credentials_from_token(token)
         )
+        if not authentication_repository:
+            return {}
         user = self.__user(authentication_repository.user_id)
         return self.__ajust_response(authentication_repository, user)
 

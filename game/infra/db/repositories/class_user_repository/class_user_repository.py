@@ -19,7 +19,6 @@ class ClassUserRepository(ClassUserRepositoryInterface):
             ClassUserEntity.create_table(engine=engine)
             ClassEntity.create_table(engine=engine)
             UsersEntity.create_table(engine=engine)
-            breakpoint()
             class_user = (
                 insert(ClassUserEntity)
                 .values(class_id=class_id, user_id=user_id)

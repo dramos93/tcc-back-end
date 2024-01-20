@@ -13,5 +13,5 @@ class AuthenticationUserCaseInterface(ABC):
         pass
 
     @abstractmethod
-    def get_user_permissions(cls, token: UUID) -> None:
+    def get_user_permissions(cls, token: UUID) -> Dict | None:
         ...
