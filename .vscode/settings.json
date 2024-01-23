@@ -3,5 +3,8 @@
         "."
     ],
     "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "workbench.activityBar.iconClickBehavior": "focus",
+    "workbench.colorTheme": "Copilot Theme",
+    "workbench.editor.decorations.colors": true
 }

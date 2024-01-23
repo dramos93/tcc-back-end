@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, Request, status, Response
+from fastapi.responses import JSONResponse
 from game.main.adapters.request_adapter import request_adapter
 from game.main.composers.users_composers import (
     create_user_composer,
@@ -24,15 +25,14 @@ classes_router = APIRouter()
 # api_key_header = APIKeyHeader(name="x-api-key")
 
 
-@user_router.post("/user")
+
+@user_router.post("/user", response_model=None)
 async def create_user(request: Request) -> Response:
     try:
         http_response = await request_adapter(request, create_user_composer())
-        breakpoint()
-        return http_response
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
-        return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e, headers={"message": "vaimbora"})
-
+        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
 
 @user_router.get("/user")
 async def handle_user(request: Request):
