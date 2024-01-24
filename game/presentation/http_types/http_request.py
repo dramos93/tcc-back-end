@@ -11,7 +11,7 @@ class HttpRequest:
         url=None,
         ipv4=None,
     ) -> None:
-        self.headers = headers
+        self.headers: dict = headers
         self.body = body
         self.query_params = query_params
         self.path_params = path_params

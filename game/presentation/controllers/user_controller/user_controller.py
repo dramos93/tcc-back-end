@@ -28,6 +28,7 @@ class CreateUserController(UserControllerInterface):
         return response
 
     def create(self, http_request: HttpRequest) -> HttpResponse:
+        # http_request = HttpRequest(**http_request)
         token = http_request.headers.get("token")
         auth = self.is_auth(token, [1, 2, 3, 4])
         if auth:
