@@ -22,6 +22,8 @@ def create_user_composer():
 
 def handle_user_composer():
     user_repository = UsersRepository()
+    authentication_repository = AuthenticationRepository()
+    authentication_use_cases = authentication_use_cases(authentication_repository, user_repository)
     use_case = UserUseCase(user_repository)
     controller = CreateUserController(use_case)
     return controller.handle

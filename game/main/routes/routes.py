@@ -38,7 +38,7 @@ async def create_user(request: Request) -> Response:
 async def handle_user(request: Request):
     try:
         http_response = await request_adapter(request, handle_user_composer())
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
@@ -49,7 +49,7 @@ async def create_game(request: Request):
         http_reponse = await request_adapter(
             request, create_multiplication_game_composer()
         )
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
@@ -60,7 +60,7 @@ async def get_all(request: Request):
         http_reponse = await request_adapter(
             request, get_all_multiplication_game_composer()
         )
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
@@ -69,7 +69,7 @@ async def get_all(request: Request):
 async def create_token(request: Request):
     try:
         http_response = await request_adapter(request, create_token_composer())
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
@@ -78,7 +78,7 @@ async def create_token(request: Request):
 async def get_by_id(request: Request):
     try:
         http_response = await request_adapter(request, get_token_composer())
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
@@ -87,7 +87,7 @@ async def get_by_id(request: Request):
 async def logout(request: Request):
     try:
         http_response = await request_adapter(request, logout_composer())
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
 
@@ -96,6 +96,6 @@ async def logout(request: Request):
 async def get_class_from_teacher(request: Request):
     try:
         http_response = await request_adapter(request, get_class_composer())
-        return JSONResponse(status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e), "message": "vaimbora"})
+        return JSONResponse(content=http_response.body, status_code=http_response.status_code)
     except Exception as e:
         return HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=e)
