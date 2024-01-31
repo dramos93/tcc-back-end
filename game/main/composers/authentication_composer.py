@@ -11,26 +11,37 @@ from game.presentation.controllers.authentication_controller.authentication_cont
 )
 
 
-
 def create_token_composer():
     authentication_repository = AuthenticationRepository()
     user_repository = UsersRepository()
-    authentication_use_cases = AuthenticationUseCases(authentication_repository, user_repository)
-    controller = AuthenticationController(authentication_use_cases, authentication_use_cases)
+    authentication_use_cases = AuthenticationUseCases(
+        authentication_repository, user_repository
+    )
+    controller = AuthenticationController(
+        authentication_use_cases, authentication_use_cases
+    )
     return controller.create_token
 
 
 def get_token_composer():
     authentication_repository = AuthenticationRepository()
     user_repository = UsersRepository()
-    authentication_use_cases = AuthenticationUseCases(authentication_repository, user_repository)
-    controller = AuthenticationController(authentication_use_cases, authentication_use_cases)
+    authentication_use_cases = AuthenticationUseCases(
+        authentication_repository, user_repository
+    )
+    controller = AuthenticationController(
+        authentication_use_cases, authentication_use_cases
+    )
     return controller.get_token
 
 
 def logout_composer():
     authentication_repository = AuthenticationRepository()
     user_repository = UsersRepository()
-    authentication_use_cases = AuthenticationUseCases(authentication_repository, user_repository)
-    controller = AuthenticationController(authentication_use_cases, authentication_use_cases)
+    authentication_use_cases = AuthenticationUseCases(
+        authentication_repository, user_repository
+    )
+    controller = AuthenticationController(
+        authentication_use_cases, authentication_use_cases
+    )
     return controller.logout

@@ -9,7 +9,11 @@ from game.presentation.interfaces.authentication_controller_interface import (
 
 
 class AuthenticationController(AuthenticationControllerInterface):
-    def __init__(self, use_case: AuthenticationUserCaseInterface, auth_use_case: AuthenticationUserCaseInterface) -> None:
+    def __init__(
+        self,
+        use_case: AuthenticationUserCaseInterface,
+        auth_use_case: AuthenticationUserCaseInterface,
+    ) -> None:
         self.__use_case = use_case
         self.auth = auth_use_case
 
@@ -45,7 +49,7 @@ class AuthenticationController(AuthenticationControllerInterface):
         body = self.__use_case.logout(user_id=user_id, token=token)
         response = HttpResponse(body=body, status_code=200)
         return response
-    
+
     def is_auth(self, token, roles_permission):
         user_permission = self.auth.get_user_permissions(token)
         if not user_permission:

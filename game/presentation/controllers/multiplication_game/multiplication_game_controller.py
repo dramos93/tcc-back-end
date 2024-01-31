@@ -1,4 +1,6 @@
-from game.domain.use_cases.authentication.authentication_interface import AuthenticationUserCaseInterface
+from game.domain.use_cases.authentication.authentication_interface import (
+    AuthenticationUserCaseInterface,
+)
 from game.presentation.http_types.http_request import HttpRequest
 from game.domain.use_cases.multiplication_game.multiplication_game_interface import (
     MultiplicationGameInterface,
@@ -10,7 +12,11 @@ from game.presentation.interfaces.multiplication_game_controller_interface impor
 
 
 class MultiplicationGameController(MultiplicationGameControllerInterface):
-    def __init__(self, use_case: MultiplicationGameInterface, auth_use_case: AuthenticationUserCaseInterface) -> None:
+    def __init__(
+        self,
+        use_case: MultiplicationGameInterface,
+        auth_use_case: AuthenticationUserCaseInterface,
+    ) -> None:
         self.__use_case = use_case
         self.auth = auth_use_case
 
