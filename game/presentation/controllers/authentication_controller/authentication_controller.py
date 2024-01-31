@@ -31,7 +31,6 @@ class AuthenticationController(AuthenticationControllerInterface):
         auth = self.is_auth(token, [1, 2, 3, 4])
         if auth:
             return auth
-        token = http_request.headers["token"]
         body = self.__use_case.get_user_permissions(token)
         response = HttpResponse(body=body, status_code=200)
         return response

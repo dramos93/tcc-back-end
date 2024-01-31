@@ -43,8 +43,8 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
     def __ajust_response(cls, authentication: AuthenticationModel, user: Users) -> Dict:
         response = {
             "user_id": authentication.user_id,
-            "token": authentication.token,
-            "created_on": authentication.created_on,
+            "token": str(authentication.token),
+            "created_on": str(authentication.created_on),
             "active": authentication.active,
             "user_name": user.user_name,
             "user_nickname": user.user_nickname,

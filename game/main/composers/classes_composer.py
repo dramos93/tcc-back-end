@@ -1,4 +1,5 @@
 from game.data.use_cases.classes_use_case.classes_use_case import ClassesUseCase
+from game.data.use_cases.authentication_use_cases.authentication_use_cases import AuthenticationUseCases
 from game.infra.db.repositories.authentication_repository.authentication_repository import AuthenticationRepository
 from game.infra.db.repositories.class_repository.class_repository import ClassRepository
 from game.infra.db.repositories.class_user_repository.class_user_repository import (
@@ -19,14 +20,12 @@ def get_class_composer():
     authentication_repository = AuthenticationRepository()
     game_repository = MultiplicationGameRepository()
     class_user_repository = ClassUserRepository()
-    authentication_use_cases = authentication_use_cases(authentication_repository, user_repository)
-
-
+    authentication_use_cases = AuthenticationUseCases(authentication_repository, user_repository)
     classes_use_case = ClassesUseCase(
         class_repository=class_repository,
         user_repository=user_repository,
         game_repository=game_repository,
         class_user_repository=class_user_repository,
     )
-    classes_controller = ClassesController(use_case=classes_use_case)
+    classes_controller = ClassesController(use_case=classes_use_case, auth_use_case=authentication_use_cases)
     return classes_controller.get_class
