@@ -19,6 +19,10 @@ class ClassesController(ClassesControllerInterface):
         self.auth = auth_use_case
 
     def get_class(self, http_request: HttpRequest) -> HttpResponse:
+        token = http_request.headers.get("token")
+        auth = self.is_auth(token, [1, 2, 3, 4])
+        if auth:
+            return auth
         user_id = http_request.query_params["user_id"]
         body = self.__use_Case.get_class(user_id=user_id)
         response = HttpResponse(body=body, status_code=200)

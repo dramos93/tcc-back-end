@@ -27,6 +27,11 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
         return self.__ajust_response(new_auth, user)
 
     def get_user_permissions(self, token: UUID) -> Dict | None:
+        try:
+            token = UUID(token)
+        except ValueError:
+            raise ValueError("Invalid token format.")
+        # Add your validation logic here
         authentication_repository = (
             self.authentication_repository.get_credentials_from_token(token)
         )
@@ -36,6 +41,10 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
         return self.__ajust_response(authentication_repository, user)
 
     def logout(self, user_id: int, token: UUID) -> None:
+        try:
+            token = UUID(token)
+        except ValueError:
+            raise ValueError("Invalid token format.")
         self.__user(user_id=user_id)
         self.authentication_repository.logout(user_id=user_id, token=token)
 

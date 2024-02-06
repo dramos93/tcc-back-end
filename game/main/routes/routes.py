@@ -103,11 +103,9 @@ async def create_token(request: Request):
 async def get_by_id(request: Request):
     try:
         http_response = await request_adapter(request, get_token_composer())
-        breakpoint()
         json = JSONResponse(
             content=http_response.body, status_code=http_response.status_code
         )
-        breakpoint()
         return json
     except Exception as e:
         print(e)
