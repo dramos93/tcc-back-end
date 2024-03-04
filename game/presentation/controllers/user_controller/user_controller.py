@@ -9,7 +9,7 @@ from game.domain.use_cases.authentication.authentication_interface import (
 )
 
 
-class CreateUserController(UserControllerInterface):
+class UserController(UserControllerInterface):
     def __init__(
         self, use_case: UserInterface, auth_use_case: AuthenticationUserCaseInterface
     ) -> None:
@@ -35,13 +35,11 @@ class CreateUserController(UserControllerInterface):
             return auth
         user_name = http_request.body["user_name"]
         user_nickname = http_request.body["user_nickname"]
-        user_class_id = http_request.body["user_class_id"]
         user_role = http_request.body["user_role"]
         user_password = http_request.body["user_password"]
         body = self.__use_case.register(
             user_name=user_name,
             user_nickname=user_nickname,
-            user_class_id=user_class_id,
             user_role=user_role,
             user_password=user_password,
         )

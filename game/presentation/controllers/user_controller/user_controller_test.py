@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 from game.presentation.controllers.user_controller.user_controller import (
-    CreateUserController,
+    UserController,
 )
 
 
@@ -9,7 +9,7 @@ class TestUserController(unittest.TestCase):
     def setUp(self):
         self.use_case = Mock()
         self.auth_use_case = Mock()
-        self.user_controller = CreateUserController(self.use_case, self.auth_use_case)
+        self.user_controller = UserController(self.use_case, self.auth_use_case)
 
     def test_is_auth_no_permission(self):
         self.auth_use_case.get_user_permissions.return_value = None

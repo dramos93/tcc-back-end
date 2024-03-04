@@ -6,13 +6,13 @@ class HttpRequest:
         self,
         query_params,
         headers,
-        body,
+        body: dict,
         path_params=None,
         url=None,
         ipv4=None,
     ) -> None:
         self.headers: dict = headers
-        self.body = body
+        self.body: dict = body
         self.query_params = query_params
         self.path_params = path_params
         self.url = url
