@@ -14,7 +14,7 @@ from game.main.composers.multiplication_game_composer import (
     create_multiplication_game_composer,
     get_all_multiplication_game_composer,
 )
-from game.main.composers.classes_composer import get_class_composer
+from game.main.composers.classes_composer import get_class_composer, get_classes_composer
 
 user_router = APIRouter()
 multiplication_game_router = APIRouter()
@@ -132,6 +132,19 @@ async def logout(request: Request):
 async def get_class_from_teacher(request: Request):
     try:
         http_response = await request_adapter(request, get_class_composer())
+        return JSONResponse(
+            content=http_response.body, status_code=http_response.status_code
+        )
+    except Exception as e:
+        print(e)
+        return JSONResponse(
+            status_code=status.HTTP_400_BAD_REQUEST, content={"detail": str(e)}
+        )
+
+@classes_router.get("/classes")
+async def get_all_classes(request: Request):
+    try:
+        http_response = await request_adapter(request, get_classes_composer())
         return JSONResponse(
             content=http_response.body, status_code=http_response.status_code
         )

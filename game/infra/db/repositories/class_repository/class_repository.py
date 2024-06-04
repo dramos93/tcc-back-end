@@ -31,6 +31,18 @@ class ClassRepository(ClassRepositoryInterface):
             except Exception as exception:
                 db.session.rollback()
                 raise exception
+    
+    @classmethod
+    def get_all(cls):
+        with DBConnectionHandler() as db:
+            try:
+                query = select(ClassEntity)
+                classes = db.session.execute(query).scalars().all()
+                return classes
+            except Exception as exception:
+                db.session.rollback()
+                raise exception
+            
 
     @classmethod
     def exists(cls, class_id) -> bool:

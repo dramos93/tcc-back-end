@@ -12,8 +12,8 @@ class UsersRepository(UsersRepositoryInterface):
         cls,
         user_name: str,
         user_nickname: str,
-        user_password: str,
         user_role: int,
+        user_password: str,
         user_active: bool = True,
     ) -> None:
         with DBConnectionHandler() as db:

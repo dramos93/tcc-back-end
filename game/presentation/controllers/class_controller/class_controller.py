@@ -27,9 +27,20 @@ class ClassesController(ClassesControllerInterface):
         body = self.__use_Case.get_class(user_id=user_id)
         response = HttpResponse(body=body, status_code=200)
         return response
+    
+    def get_classes(self, http_request: HttpRequest) -> HttpResponse:
+        token = http_request.headers.get("token")
+        auth = self.is_auth(token, [1, 2, 3, 4])
+        if auth:
+            return auth
+        body = self.__use_Case.get_classes()
+        response = HttpResponse(body=body, status_code=200)
+        return response
+
 
     def is_auth(self, token, roles_permission):
-        user_permission = self.auth.get_user_permissions(token)
+        if token:
+            user_permission = self.auth.get_user_permissions(token)
         if not user_permission:
             return HttpResponse(body={"message": "Não autorizado"}, status_code=401)
         if user_permission.get("user_role") not in roles_permission:

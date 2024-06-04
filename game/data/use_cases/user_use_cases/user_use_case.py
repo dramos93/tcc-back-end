@@ -29,7 +29,6 @@ class UserUseCase(UserInterface):
 
         # Validar a string
         self.__validate_name(name=user_name)
-        # self.__validate_name(user_nickname)
 
         self.__user_repository.insert_user(
             user_name=user_name,

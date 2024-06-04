@@ -12,6 +12,7 @@ class UsersRepositoryInterface(ABC):
         user_nickname: str,
         user_role: int,
         user_password: str,
+        user_active: bool = True,
     ) -> None:
         pass
 

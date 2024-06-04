@@ -26,7 +26,7 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
         user = self.__user(new_auth.user_id)
         return self.__ajust_response(new_auth, user)
 
-    def get_user_permissions(self, token: UUID) -> Dict | None:
+    def get_user_permissions(self, token: UUID = "") -> Dict | None:
         try:
             token = UUID(token)
         except ValueError:

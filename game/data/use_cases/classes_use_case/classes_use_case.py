@@ -63,6 +63,18 @@ class ClassesUseCase(ClassesUseCaseInterface):
             )
 
         return classes
+    
+    def get_classes(self) -> List[Dict]:
+        classes_from_repo = self.class_repository.get_all()
+        classes = []
+        for class_  in classes_from_repo:
+            classes.append({
+                "class_id": class_.class_id,
+                "class_name": class_.class_name,
+                "class_active": class_.class_active,
+                })
+        # return self.class_repository.get_all()
+        return classes
 
     def __get_class_name(self, class_id: int) -> str:
         class_data = self.class_repository.get_by_id(class_id=class_id)
