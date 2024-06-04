@@ -5,7 +5,7 @@ from game.presentation.http_types.http_response import HttpResponse
 
 class AuthenticationControllerInterface(ABC):
     @abstractmethod
-    def create_token(self, http_request: HttpRequest) -> None:
+    def create_token(self, http_request: HttpRequest) -> HttpResponse | None:
         pass
 
     @abstractmethod
@@ -13,5 +13,5 @@ class AuthenticationControllerInterface(ABC):
         pass
 
     @abstractmethod
-    def logout(self, http_request: HttpRequest) -> None:
+    def logout(self, http_request: HttpRequest) -> HttpResponse | None:
         pass

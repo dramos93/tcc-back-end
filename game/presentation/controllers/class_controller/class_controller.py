@@ -39,8 +39,9 @@ class ClassesController(ClassesControllerInterface):
 
 
     def is_auth(self, token, roles_permission):
-        if token:
-            user_permission = self.auth.get_user_permissions(token)
+        if not token or token == '':
+            return HttpResponse(body={"message": "token vazio ou nulo."}, status_code=401)
+        user_permission = self.auth.get_user_permissions(token)
         if not user_permission:
             return HttpResponse(body={"message": "Não autorizado"}, status_code=401)
         if user_permission.get("user_role") not in roles_permission:

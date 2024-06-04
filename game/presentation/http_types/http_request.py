@@ -1,6 +1,9 @@
 # from starlette.datastructures import Headers
 
 
+from types import coroutine
+
+
 class HttpRequest:
     def __init__(
         self,

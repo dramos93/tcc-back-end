@@ -51,7 +51,6 @@ class MultiplicationGameController(MultiplicationGameControllerInterface):
             user_id=user_id, class_id=class_id
         )
         response = HttpResponse(body=body, status_code=200)
-
         return response
 
     def is_auth(self, token, roles_permission):

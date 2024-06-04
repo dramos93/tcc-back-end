@@ -27,7 +27,6 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
                 db.session.commit()
                 db.session.refresh(new_data)
             except Exception as exception:
-                breakpoint()
                 db.session.rollback()
                 raise exception
         return new_data
@@ -43,7 +42,6 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
 
                 return data
             except Exception as exception:
-                breakpoint()
                 db.session.rollback()
                 raise exception
 
@@ -62,6 +60,5 @@ class AuthenticationRepository(AuthenticationRepositoryInterface):
                 db.session.execute(query)
                 db.session.commit()
             except Exception as exception:
-                breakpoint()
                 db.session.rollback()
                 raise exception

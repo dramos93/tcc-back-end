@@ -58,7 +58,6 @@ class UsersRepository(UsersRepositoryInterface):
                 return entity
 
             except Exception as exception:
-                breakpoint()
                 db.session.rollback()
                 raise exception
 
@@ -91,6 +90,5 @@ class UsersRepository(UsersRepositoryInterface):
                 return db.session.query(query).scalar()
 
             except Exception as exception:
-                breakpoint()
                 db.session.rollback()
                 raise exception

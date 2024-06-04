@@ -43,7 +43,7 @@ class UserUseCase(UserInterface):
 
     @classmethod
     def __validate_name(cls, name: str) -> None:
-        if not name.isalpha():
+        if not name.replace(" ", "").isalpha():
             raise Exception("Deve conter só letra.")
 
     def __search_user(self, user_id: int) -> Users:

@@ -9,9 +9,9 @@ class AuthenticationUserCaseInterface(ABC):
         pass
 
     @abstractmethod
-    def logout(cls, user_id: int, token: UUID) -> None:
+    def logout(cls, user_id: int, token: UUID | None) -> None:
         pass
 
     @abstractmethod
-    def get_user_permissions(cls, token: UUID) -> Dict | None:
+    def get_user_permissions(cls, token: UUID | None) -> Dict | None:
         ...

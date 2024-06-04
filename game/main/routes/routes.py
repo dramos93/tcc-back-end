@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Request, status, Response
+from fastapi import APIRouter, Request, status, Response
 from fastapi.responses import JSONResponse
 from game.main.adapters.request_adapter import request_adapter
 from game.main.composers.users_composers import (
