@@ -20,20 +20,21 @@ class AuthenticationController(AuthenticationControllerInterface):
         self.auth = auth_use_case
 
     def create_token(self, http_request: HttpRequest) -> HttpResponse | None:
-        token = http_request.headers.get("token")
-        auth = self.is_auth(token, [1, 2, 3, 4])
-        if auth:
-            return auth
-        user_id = http_request.body["user_id"]
-        user_password = http_request.body["user_password"]
-        body = self.__use_case.create_token(
-            user_id=user_id, user_password=user_password
-        )
-        response = HttpResponse(body=body, status_code=200)
-        return response
+        try:
+            user_nickname = http_request.body["user_nickname"]
+            user_password = http_request.body["user_password"]
+            body = self.__use_case.create_token(
+                user_nickname=user_nickname, user_password=user_password
+            )
+            response = HttpResponse(body=body, status_code=200)
+        except Exception as e:
+            raise(e)
+        else:
+            return response
 
     def get_token(self, http_request: HttpRequest) -> HttpResponse:
         token = http_request.headers.get("token")
+        # breakpoint()
         auth = self.is_auth(token, [1, 2, 3, 4])
         if auth:
             return auth

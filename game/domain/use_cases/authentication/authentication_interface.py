@@ -5,7 +5,7 @@ from uuid import UUID
 
 class AuthenticationUserCaseInterface(ABC):
     @abstractmethod
-    def create_token(cls, user_id: int, user_password: str) -> Dict:
+    def create_token(cls, user_nickname: str, user_password: str) -> Dict:
         pass
 
     @abstractmethod

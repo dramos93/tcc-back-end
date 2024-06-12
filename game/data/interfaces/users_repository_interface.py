@@ -29,5 +29,5 @@ class UsersRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def login(cls, user_id: int, user_password: str) -> bool:
+    def login(cls, user_nickname: str, user_password: str) -> Users:
         ...

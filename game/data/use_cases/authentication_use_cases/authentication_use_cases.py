@@ -20,11 +20,15 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
         self.authentication_repository = authentication_repository
         self.user_repository = user_repository
 
-    def create_token(self, user_id: int, user_password: str) -> Dict:
-        self.__logged(user_id=user_id, user_password=user_password)
-        new_auth = self.authentication_repository.create(user_id)
-        user = self.__user(new_auth.user_id)
-        return self.__ajust_response(new_auth, user)
+    def create_token(self, user_nickname: str, user_password: str) -> Dict:
+        try:
+            user_id = self.__logged(user_nickname=user_nickname, user_password=user_password)
+            new_auth = self.authentication_repository.create(user_id)
+            user = self.__user(new_auth.user_id)
+        except Exception as e:
+            raise(e)
+        else:
+            return self.__ajust_response(new_auth, user)
 
     def get_user_permissions(self, token: UUID | None) -> Dict | None:
         try:
@@ -67,6 +71,8 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
             raise Exception("Usuário não encontrado.")
         return user
 
-    def __logged(self, user_id: int, user_password: str) -> None:
-        if not self.user_repository.login(user_id=user_id, user_password=user_password):
+    def __logged(self, user_nickname: str, user_password: str) -> int:
+        login = self.user_repository.login(user_nickname=user_nickname, user_password=user_password)
+        if not login:
             raise Exception("Usuário ou senha não existe.")
+        return login.user_id
