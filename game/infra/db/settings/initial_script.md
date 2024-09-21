@@ -58,18 +58,18 @@ Criando Tabela Classes
 - WARNING: It may differ from actual native database DDL
 ---
 ```sql
-	CREATE TABLE public.classes (
-		class_id serial4 NOT NULL,
-		class_name varchar NOT NULL,
-		class_active bool NULL
-	);
+CREATE TABLE public.classes (
+	class_id serial4 NOT NULL,
+	class_name varchar NOT NULL,
+	class_active bool NULL
+);
 
-	INSERT INTO public.classes
-	(class_id, class_name, class_active)
-	VALUES(1, '1º Série - Matutino', true);
-	INSERT INTO public.classes
-	(class_id, class_name, class_active)
-	VALUES(2, '1º Série - Matutino', true);
+INSERT INTO public.classes
+(class_id, class_name, class_active)
+VALUES(1, '1º Série - Matutino', true);
+INSERT INTO public.classes
+(class_id, class_name, class_active)
+VALUES(2, '1º Série - Matutino', true);
 ```
 
 Criando Tabela Multiplition Game
