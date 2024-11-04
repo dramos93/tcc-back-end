@@ -10,7 +10,8 @@ from game.main.routes.routes import (
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000",  # Substitua pela origem do seu front-end
+    "http://localhost:8080/",  # Substitua pela origem do seu front-end
+    "http://172.17.199.189:8080/",
     # Adicione outras origens se necessário
 ]
 
