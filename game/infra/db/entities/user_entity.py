@@ -6,6 +6,7 @@ class UsersEntity(Base):
     __tablename__ = "users"
 
     user_id = Column(Integer, primary_key=True, autoincrement=True)
+    user_class_id = Column(Integer, primary_key=True, autoincrement=True)
     user_name = Column(String, nullable=False)
     user_nickname = Column(String, unique=True)
     user_password = Column(String)

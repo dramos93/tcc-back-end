@@ -62,6 +62,7 @@ class AuthenticationUseCases(AuthenticationUserCaseInterface):
             "user_name": user.user_name,
             "user_nickname": user.user_nickname,
             "user_role": user.user_role,
+            "class_id": user.user_class_id,
         }
         return response
 
