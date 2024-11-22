@@ -46,8 +46,6 @@ class ClassesUseCase(ClassesUseCaseInterface):
                 self.user_repository.get_user_by_id(user_id=user.user_id)
                 for user in users_id
             ]
-            # users: List[Users] = [user for user in users if user.user_role == 2]
-
             classes.append(
                 {
                     "className": self.__get_class_name(class_id=c.class_id),
